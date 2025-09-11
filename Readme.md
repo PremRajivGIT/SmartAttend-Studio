@@ -10,3 +10,8 @@ Follow these steps:
 
 ```bash
 wsl --install
+```
+### 2. Clone this repository (hint: use git clone)
+### 3. Install requirements.txt (TIP: Create a venv or rewrite source packages 💀 xd)
+***Note: caution use python3.11 for better compatibility*** 
+### 4. Run app.py
