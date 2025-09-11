@@ -5,7 +5,7 @@
 Follow These Steps:
 ```bash
 wsl --install
-```
+
 *simple right ? ;)*
 
 <h3>2. Now Clone This Repo </h3>
