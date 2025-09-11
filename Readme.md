@@ -14,4 +14,5 @@ wsl --install
 ### 2. Clone this repository (hint: use git clone)
 ### 3. Install requirements.txt (TIP: Create a venv or rewrite source packages 💀 xd)
 ***Note: caution use python3.11 for better compatibility*** 
-### 4. Run app.py
+### 4. You need to Download these files and move them to the project directory(tbc)
+### 5. Run app.py
