@@ -3,7 +3,7 @@
 <hr>
 <h3> 1. Install WSL (Important!) </h3>
 Follow These Steps:
-``` 
+``` bash
 wsl --install
 ```
 *simple right ? ;)*
