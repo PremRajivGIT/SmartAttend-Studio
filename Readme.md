@@ -3,9 +3,9 @@
 <hr>
 <h3> 1. Install WSL (Important!) </h3>
 Follow These Steps:
-``` bash
+```bash
 wsl --install
-
+```
 *simple right ? ;)*
 
 <h3>2. Now Clone This Repo </h3>
