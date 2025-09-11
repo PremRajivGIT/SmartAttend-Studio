@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Smart Attend Studio</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Exo+2:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    
+    <style>
+        :root {
+            /* Anime Color Palette */
+            --void-black: #0A0A0F;
+            --midnight-purple: #1A0B2E;
+            --electric-blue: #0052FF;
+            --cyber-magenta: #FF0080;
+            --neon-cyan: #00FFFF;
+            --plasma-pink: #FF69B4;
+            --energy-yellow: #FFFF00;
+            --crystal-white: #FFFFFF;
+
+            /* Gradients */
+            --main-dev-gradient: linear-gradient(135deg, #0052FF 0%, #8B5CF6 50%, #FF0080 100%);
+            --background-gradient: radial-gradient(ellipse at top, rgba(26, 11, 46, 0.8) 0%, rgba(10, 10, 15, 1) 100%);
+            --glow-main: 0 0 20px rgba(139, 92, 246, 0.6), 0 0 40px rgba(255, 0, 128, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            padding-top: 100px !important;
+            font-family: 'Exo 2', sans-serif;
+            background: var(--void-black);
+            color: var(--crystal-white);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Animated Background */
+        .anime-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -2;
+            background: var(--background-gradient);
+        }
+
+        .anime-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            animation: float-particle 8s linear infinite;
+            box-shadow: 0 0 8px currentColor;
+        }
+
+        .particle:nth-child(2n) {
+            background: var(--plasma-pink);
+            animation-duration: 12s;
+            animation-delay: -2s;
+        }
+
+        .particle:nth-child(3n) {
+            background: var(--energy-yellow);
+            animation-duration: 10s;
+            animation-delay: -4s;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0.5rem 0;
+            background: var(--background-gradient) !important;
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid var(--electric-blue);
+            padding: 1rem 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar-scrolled {
+            background: rgba(10, 10, 15, 0.98) !important;
+            border-bottom-color: var(--cyber-magenta);
+            box-shadow: var(--glow-main);
+        }
+
+        .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--main-dev-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: var(--glow-main);
+            text-decoration: none;
+        }
+
+        .navbar-brand:hover {
+            -webkit-text-fill-color: transparent;
+            filter: brightness(1.2);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--crystal-white) !important;
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.8rem 1.5rem !important;
+            margin: 0 0.3rem;
+            border-radius: 8px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--neon-cyan) !important;
+            text-shadow: 0 0 10px var(--neon-cyan);
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        .navbar-nav .nav-link.active {
+            color: var(--cyber-magenta) !important;
+            background: rgba(255, 0, 128, 0.15);
+            text-shadow: 0 0 15px var(--cyber-magenta);
+            border: 1px solid rgba(255, 0, 128, 0.3);
+        }
+
+        .navbar-nav .nav-link i {
+            margin-right: 0.5rem;
+        }
+
+        .navbar-toggler {
+            border: 2px solid var(--electric-blue);
+            background: rgba(0, 82, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            padding: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 15px rgba(0, 82, 255, 0.5);
+        }
+
+        .navbar-toggler-icon {
+            filter: brightness(0) invert(1);
+            width: 24px;
+            height: 24px;
+        }
+
+        .navbar-collapse {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Main content adjustment for fixed navbar */
+        .container {
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        /* Footer Enhancement */
+        .footer {
+            background: var(--background-gradient) !important;
+            border-top: 3px solid var(--electric-blue);
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--main-dev-gradient);
+            animation: energy-flow 3s ease-in-out infinite;
+        }
+
+        @keyframes energy-flow {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+                box-shadow: var(--glow-main);
+            }
+        }
+
+        .footer .text-muted {
+            color: var(--neon-cyan) !important;
+            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Content enhancement */
+        .card {
+            background: rgba(0, 82, 255, 0.1) !important;
+            border: 2px solid rgba(139, 92, 246, 0.3) !important;
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--neon-cyan) !important;
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .btn-primary {
+            background: var(--main-dev-gradient) !important;
+            border: 2px solid var(--cyber-magenta) !important;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--glow-main);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 120px !important;
+            }
+
+            .navbar-brand {
+                font-size: 1.4rem !important;
+                letter-spacing: 1px !important;
+            }
+
+            .navbar-nav .nav-link {
+                text-align: center !important;
+                margin: 0.2rem 0 !important;
+                padding: 0.5rem !important;
+            }
+
+            .navbar-collapse {
+                background: var(--void-black);
+                border-top: 1px solid var(--electric-blue);
+            }
+
+            .energy-grid,
+            .scan-line {
+                display: none;
+            }
+
+            .particle {
+                animation-duration: 12s;
+            }
+        }
+
+        /* Energy Grid Effect */
+        .energy-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            background-image:
+                linear-gradient(rgba(0, 82, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 82, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-pulse 6s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes grid-pulse {
+            0%, 100% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        /* Scan line effect */
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 8px var(--neon-cyan);
+            animation: scan 4s ease-in-out infinite;
+        }
+
+        @keyframes scan {
+            0%, 100% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(100vw);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="anime-background">
+        <div class="anime-particles">
+            <!-- Particles will be generated by JavaScript -->
+        </div>
+    </div>
+    <div class="energy-grid"></div>
+    <div class="scan-line"></div>
+
+    <!-- Enhanced Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Smart Attend Studio</a>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i data-feather="upload"></i> Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/models"><i data-feather="database"></i> Models</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('about') }}"><i data-feather="info"></i> About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer mt-5 py-4">
+        <div class="container text-center">
+            <span class="text-muted">ML-Powered Student Attendance Studio &copy; 2025 (RRR)</span>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <!-- Enhanced JavaScript -->
+    <script>
+        // Debounce function
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Generate particles
+        function createParticles() {
+            const particleContainer = document.querySelector('.anime-particles');
+            if (!particleContainer) return;
+
+            const isMobile = window.innerWidth <= 768;
+            const particleCount = isMobile ? 15 : 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                particleContainer.appendChild(particle);
+            }
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', debounce(() => {
+            const navbar = document.querySelector('.navbar');
+            const scrolled = window.pageYOffset;
+
+            if (scrolled > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        }, 100));
+
+        // Set active nav link
+        function setActiveNavLink() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href');
+
+                if ((currentPath === '/' && href === '/') ||
+                    (currentPath.includes('/models') && href === '/models') ||
+                    (currentPath.includes('/about') && (href.includes('about') || href === '/about')) ||
+                    (currentPath !== '/' && href && href !== '/' && currentPath.includes(href.replace(/[{}()]/g, '')))) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('a[href^="#"]')) {
+                e.preventDefault();
+                const href = e.target.getAttribute('href');
+                const element = document.querySelector(href);
+                if (element) {
+                    const offsetTop = element.offsetTop - 100;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+
+        // Navbar collapse handling
+        document.addEventListener('DOMContentLoaded', () => {
+            const navbarCollapse = document.querySelector('#navbarNav');
+            const toggler = document.querySelector('.navbar-toggler');
+
+            // Close navbar when clicking a nav link on mobile
+            document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768 && navbarCollapse.classList.contains('show')) {
+                        const collapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse, { toggle: false });
+                        collapse.hide();
+                    }
+                });
+            });
+
+            // Sync toggler state with collapse events
+            navbarCollapse.addEventListener('shown.bs.collapse', () => {
+                toggler.setAttribute('aria-expanded', 'true');
+                toggler.classList.remove('collapsed');
+            });
+
+            navbarCollapse.addEventListener('hidden.bs.collapse', () => {
+                toggler.setAttribute('aria-expanded', 'false');
+                toggler.classList.add('collapsed');
+            });
+
+            createParticles();
+            setActiveNavLink();
+            initializeFeatherIcons();
+        });
+
+        // Reinitialize on dynamic content load
+        document.addEventListener('htmx:afterSwap', () => {
+            initializeFeatherIcons();
+            setActiveNavLink();
+            const navbarCollapse = document.querySelector('#navbarNav');
+            const toggler = document.querySelector('.navbar-toggler');
+            if (window.innerWidth <= 768 && navbarCollapse.classList.contains('show')) {
+                const collapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse, { toggle: false });
+                collapse.hide();
+            }
+        });
+
+        document.addEventListener('turbo:load', () => {
+            initializeFeatherIcons();
+            setActiveNavLink();
+            createParticles();
+        });
+
+        // Handle resize
+        window.addEventListener('resize', debounce(() => {
+            setActiveNavLink();
+            initializeFeatherIcons();
+        }, 200));
+
+        // Initialize Feather icons
+        function initializeFeatherIcons() {
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+        }
+
+        // Auto-refresh particles periodically
+        setInterval(() => {
+            const existingParticles = document.querySelectorAll('.particle').length;
+            const isMobile = window.innerWidth <= 768;
+            const maxParticles = isMobile ? 15 : 30;
+            if (existingParticles < maxParticles) {
+                createParticles();
+            }
+        }, 10000);
+    </script>
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>
