@@ -12,18 +12,9 @@ Follow these steps:
 
 ```bash
 wsl --install
-
-
-
-
-### 2. Clone this repository (hint: use git clone)
-
-```bash
-git clone https://github.com/<your-username>/SmartAttend-Studio.git
-cd SmartAttend-Studio
 ```
 
-
+### 2. Clone this repository (hint: use git clone in WSL(Ubuntu))
 
 ### 3. Install requirements.txt
 
@@ -51,14 +42,14 @@ pip install -r requirements.txt
 
 ### 4. You need to Download these files and move them to the project directory (tbc)
 
-* Face detection model: `yolov8m_200e.pt` → put inside `models/`
+* Face detection model: [`yolov8m_200e.pt`](https://drive.google.com/file/d/1IJZBcyMHGhzAi0G4aZLcqryqZSjPsps-/view?usp=sharing) → put inside `The Root Directory`  
 
 ---
 
 ### 5. Run app.py
 
 ```bash
-flask run
+python3.11 app.py
 ```
 
 Visit 👉 [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
@@ -91,10 +82,9 @@ Visit 👉 [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
 
 ```
 SmartAttend-Studio/
-│── app.py                # Flask entrypoint
+│── app.py                 # Flask entrypoint
 │── requirements.txt       # Python dependencies
-│── models/
-│   └── yolov8m_200e.pt    # YOLOv8 face detection model
+│──  yolov8m_200e.pt       # YOLOv8 face detection model
 │── static/                # Frontend assets
 │── templates/             # HTML templates
 │── utils/                 # Helper scripts (training, inference)
@@ -103,21 +93,3 @@ SmartAttend-Studio/
 
 
 
-## 🔮 Future Improvements
-
-* [ ] Web UI for training status
-* [ ] Real-time webcam attendance
-* [ ] Mobile app integration
-* [ ] Cloud deployment
-
-
-
-## 📝 License
-
-MIT License © 2025 \[Your Name]
-
-```
-
----
-
-```
