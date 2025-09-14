@@ -72,8 +72,8 @@ Visit 👉 [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
 
 ## 🖥️ How to Use the Model
 
-* You Need Our Mobile Application to Run the exported model -> (link to be updated)
-* Git Repo for our Mobile Application -> (link to be Updated)
+* You Need Our Mobile Application to Run the exported model -> [To Be Updated](https://images.alphacoders.com/137/1377812.png)
+* Git Repo for our Mobile Application -> [Smart Attend Mobile APP](https://github.com/CH-V-N-Rugvidh/SmartAttendMobile)
 
 
 
