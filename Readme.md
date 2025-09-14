@@ -42,7 +42,8 @@ pip install -r requirements.txt
 
 ### 4. You need to Download these files and move them to the project directory (tbc)
 
-* Face detection model: [`yolov8m_200e.pt`](https://drive.google.com/file/d/1IJZBcyMHGhzAi0G4aZLcqryqZSjPsps-/view?usp=sharing) → put inside `The Root Directory`  
+* Face detection model: [`yolov8m_200e.pt`](https://drive.google.com/file/d/1IJZBcyMHGhzAi0G4aZLcqryqZSjPsps-/view?usp=sharing) → put inside `The Root Directory`
+* Credits for the Yolo Face Model, Visit -> [https://github.com/Yusepp/YOLOv8-Face](https://github.com/Yusepp/YOLOv8-Face) 
 
 ---
 
@@ -64,16 +65,16 @@ Visit 👉 [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
 * 🧠 **Face embeddings** with TensorFlow/Keras FaceNet
 * 🔄 **Real-time attendance marking**
 * 🏫 **Multi-classroom support**
-* 🗄 **Database integration** with SQLAlchemy
+* 🗄 **Database integration** with SQLite
 * 📊 **Model training & export** (ONNX / TFLite)
-* ⚡ Optimized for **GPU acceleration**
 
 
 
-## 🖥️ Usage
+## 🖥️ How to Use the Model
 
-* Select a class → scan student faces → attendance auto-marked ✅
-* Missed students? → re-scan → system merges results.
+* You Need Our Mobile Application to Run the exported model -> (link to be updated)
+* Git Repo for our Mobile Application -> (link to be Updated)
+
 
 
 
