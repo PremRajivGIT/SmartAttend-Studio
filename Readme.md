@@ -19,6 +19,7 @@ wsl --install
 ### 3. Install requirements.txt
 
 (TIP: Create a venv or rewrite source packages 💀 xd)
+
 ***Note: Use python3.11 for better compatibility***
 
 ```bash
